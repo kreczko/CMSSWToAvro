@@ -168,10 +168,13 @@ Then in the `beginJob()` method, define the schema:
 ```
 This schema has an event record with fields for arrays of jet records (or physics objects).  The jet objects then are their own records with the following fields `{pt,eta,phi}` and `{pt,eta,phi,mass}` for the `ak4chsjets` and `ak4pupjets` collections respectively.
 
-Then create the file:
+Then, still in the `beginJob()` create the file and the schema interface and object:
 ```	
 const char *dbname = "jets.avro";
 rval = avro_file_writer_create_with_codec(dbname, event_schema, &db, "null", 0);
+
+avroEventInterface = avro_generic_class_from_schema(event_schema);
+avro_generic_value_new(avroEventInterface,&avroEvent);
 ```
 
 
