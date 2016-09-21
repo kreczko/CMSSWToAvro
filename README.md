@@ -15,6 +15,8 @@ The following steps are required:
 
 The build of Avro-C has been discussed in this ticket: https://issues.apache.org/jira/browse/AVRO-1844.
 
+First download the latest stable release from this [Apache page](http://www.apache.org/dyn/closer.cgi/avro/).  We used this [one](http://apache.mirrors.pair.com/avro/stable/c/avro-c-1.8.1.tar.gz).  Follow the build README.
+
 Here we copy the relevant fix needed to properly include Jansson.
 
 Replace the following lines in CMakeLists.txt: 
@@ -125,9 +127,51 @@ The steps are as follows:
 
 The entirety of the example is given in [AvroProducer.cc](https://github.com/nhanvtran/CMSSWToAvro/blob/master/AvroProducer/plugins/AvroProducer.cc).  Below, we walk through step-by-step this example.
 
-### Defining schema
+### Defining a schema
 
 In this example, we define the schema directly in the source code. In the future, we plan to expand the examples to read in an external `JSON` file which can then be converted with native CMSSW `yaml` libraries or by directly reading in `yaml` files.  However, in this case, including the schema, in JSON format, directly into the source code makes the example as transparent as possible.
+
+First declare the schema object, the output file, and the event interface in the header:
+```
+avro_schema_t event_schema;
+avro_file_writer_t db;
+avro_value_iface_t *avroEventInterface;
+avro_value_t avroEvent;
+```     
+The `avro_value_t` and `avro_value_iface_t` gives you record interface for a given event.
+
+Then in the `beginJob()` method, define the schema:
+```    
+    const char EVENT_SCHEMA[] =
+     "{\"type\": \"record\",\n \
+     \"name\": \"Event\", \n \
+     \"fields\": [ \n \
+         {\"name\": \"ak4chsjets\", \n \
+          \"type\": {\"type\": \"array\", \"items\": \n \
+                   {\"type\": \"record\", \n \
+                    \"name\": \"AK4CHSJet\", \n \
+                    \"fields\": [ \n \
+                        {\"name\": \"pt\", \"type\": \"double\"}, \n \
+                        {\"name\": \"eta\", \"type\": \"double\"}, \n \
+                        {\"name\": \"phi\", \"type\":\"double\"}]}}}, \n \
+        {\"name\": \"ak4pupjets\", \n \
+          \"type\": {\"type\": \"array\", \"items\": \n \
+                   {\"type\": \"record\", \n \
+                    \"name\": \"AK4PUPJet\", \n \
+                    \"fields\": [ \n \
+                        {\"name\": \"pt\", \"type\": \"double\"}, \n \
+                        {\"name\": \"eta\", \"type\": \"double\"}, \n \
+                        {\"name\": \"phi\", \"type\":\"double\"},  \n \
+                        {\"name\": \"mass\", \"type\":\"double\"}]}}} \n \
+                        ]}";
+
+```
+Then create the file:
+```	
+const char *dbname = "jets.avro";
+rval = avro_file_writer_create_with_codec(dbname, event_schema, &db, "null", 0);
+```
+
 
 
 
