@@ -116,20 +116,18 @@ scram setup avro
 
 ## Creating an Avro file
 
-In this example, we take two jet collections from `MiniAOD` and write them in Avro format.  
-We choose this particular example because of the non-trivial (non-flat) structure that is sometimes desired in particle physics.
-We write vectors of jet object records, which vary in size from event-to-event, for two different jet object collections which can contain different information.  
+In this example, we take two jet collections from `MiniAOD` and write them in Avro format.  We choose this particular example because of the non-trivial (non-flat) structure that is sometimes desired in particle physics.  We write vectors of jet object records, which vary in size from event-to-event, for two different jet object collections which can contain different information.  
+
 The steps are as follows:
 - define schema using JSON format
 - fill schema
 - write out file
 
+The entirety of the example is given in [AvroProducer.cc](https://github.com/nhanvtran/CMSSWToAvro/blob/master/AvroProducer/plugins/AvroProducer.cc).  Below, we walk through step-by-step this example.
+
 ### Defining schema
 
-In this example, we define the schema directly in the source code.  
-In the future, we plan to expand the examples to read in an external `JSON` file which can then be converted with native CMSSW `yaml` libraries or by
-directly reading in `yaml` files.
-However, in this case, including the schema, in JSON format, directly into the source code makes the example as transparent as possible.
+In this example, we define the schema directly in the source code. In the future, we plan to expand the examples to read in an external `JSON` file which can then be converted with native CMSSW `yaml` libraries or by directly reading in `yaml` files.  However, in this case, including the schema, in JSON format, directly into the source code makes the example as transparent as possible.
 
 
 
