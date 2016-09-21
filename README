@@ -1,9 +1,0 @@
-# CMSSWToBigData
-
-## About
-
-This repository is a collection of examples which take CMS software (CMSSW) event-based data format (`MiniAOD`).
-
-## Follow-up documentation
-
-See this README for CMSSW to Avro
