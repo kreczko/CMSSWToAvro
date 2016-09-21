@@ -166,6 +166,8 @@ Then in the `beginJob()` method, define the schema:
                         ]}";
 
 ```
+This schema has an event record with fields for arrays of jet records (or physics objects).  The jet objects then are their own records with the following fields `{pt,eta,phi}` and `{pt,eta,phi,mass}` for the `ak4chsjets` and `ak4pupjets` collections respectively.
+
 Then create the file:
 ```	
 const char *dbname = "jets.avro";
