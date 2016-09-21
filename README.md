@@ -7,9 +7,9 @@ This repository is a collection of examples which take c++ CMS software (CMSSW) 
 ## Overview
 
 The following steps are required:
-- Install the Avro-C package
-- Link Avro-C to CMSSW
-- Create Avro file!
+- **Install the Avro-C package**
+- **Link Avro-C to CMSSW**
+- **Create Avro file!**
 
 ## Installing the Avro C package
 
@@ -95,4 +95,24 @@ endif (JANSSON_LIBRARIES AND JANSSON_INCLUDE_DIRS)
     link_directories(${JANSSON_LIBRARY_DIRS})
 ```
 This allows the user to specify -DJANSSON_PATH as a command-line option to cmake, and this worked to build Avro.
+
+## Setting up CMSSW and linking the built Avro-C libraries
+
+_n.b. This recipe is setup to work at cmslpc-sl6.fnal.gov_
+
+First set up your CMSSW enviroment, in this case we work in CMSSW releast `8_0_19`:
+```
+cmsrel CMSSW_8_0_19
+cd CMSSW_8_0_19/src
+git clone git@github.com:nhanvtran/CMSSWToAvro.git Demo
+```
+
+Copy your Avro-C `include` and `lib` into `Demo/externalAvro`.  In this repository are libraries and headers which work at cmslpc-sl6.fnal.gov.
+Next, copy the `avro.xml` file into your CMSSW configuration directory to properly link and tell CMSSW about it.
+```
+cp Demo/AvroProducer/externalAvro/avro.xml config/toolbox/$SCRAM_ARCH/tools/selected/.
+scram setup avro
+```
+
+
 
