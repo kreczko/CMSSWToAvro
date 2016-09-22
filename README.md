@@ -1,5 +1,7 @@
 # CMSSWToAvro
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.154683.svg)](https://doi.org/10.5281/zenodo.154683)
+
 ## About
 
 This repository is an example which take c++ CMS software (CMSSW) framework [ROOT](https://root.cern.ch)-based event data format (`MiniAOD`) and converts it to the [Avro](https://avro.apache.org) data format.  This is part of a proof-of-principle workflow which converts `MiniAOD` to Avro and performs the analysis in Spark/Scala.
