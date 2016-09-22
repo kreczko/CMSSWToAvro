@@ -231,12 +231,20 @@ At the end of the event, append the event record to the file.
 avro_file_writer_append_value(db,&avroEvent);
 ```
 
-### Write out file
+### Write out file and run the job
 
 Finally write out the file:
 ```
 avro_file_writer_close(db);
 ```
+
+After compiling the code, run the CMSSW job:
+```
+scram b -j8 -r
+cd Demo/AvroProducer/python
+cmsRun ConfFile_cfg.py
+```
+
 
 
 
