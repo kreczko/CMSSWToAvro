@@ -1,4 +1,4 @@
-# CMSSWToBigData
+# CMSSWToAvro
 
 ## About
 
