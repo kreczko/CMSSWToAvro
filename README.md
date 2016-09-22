@@ -177,6 +177,10 @@ avroEventInterface = avro_generic_class_from_schema(event_schema);
 avro_generic_value_new(avroEventInterface,&avroEvent);
 ```
 
+### Filling the schema
+
+### Write out file
+
 
 
 
